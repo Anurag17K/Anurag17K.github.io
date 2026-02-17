@@ -43,7 +43,13 @@
             display: block;
             margin-bottom: 8px;
         }
-        #uts-panel button {
+        #randomCategoryPanel {
+            display: none;
+            margin-top: 10px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        #randomCategoryPanel button {
             width: 100%;
             margin: 4px 0;
             cursor: pointer;
@@ -84,17 +90,29 @@
             <label><input type="radio" name="uts-theme" value="default" checked> Default</label>
             <label><input type="radio" name="uts-theme" value="dark"> Dark</label>
             <hr>
-            <button data-category="beach">Beach</button>
-            <button data-category="city">City</button>
-            <button data-category="night">Night</button>
-            <button data-category="mountain">Mountain</button>
-            <button data-category="lava">Lava</button>
+            <button id="randomMainBtn">Random Theme ▸</button>
+            <div id="randomCategoryPanel">
+                <button data-category="beach">Beach</button>
+                <button data-category="city">City</button>
+                <button data-category="night">Night</button>
+                <button data-category="mountain">Mountain</button>
+                <button data-category="lava">Lava</button>
+            </div>
         `;
         document.body.appendChild(panel);
 
         // Toggle panel
         toggleBtn.addEventListener("click", () => {
             panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+
+        // Toggle Random Categories
+        const randomMainBtn = panel.querySelector("#randomMainBtn");
+        const randomPanel = panel.querySelector("#randomCategoryPanel");
+        randomMainBtn.addEventListener("click", () => {
+            const isOpen = randomPanel.style.display === "block";
+            randomPanel.style.display = isOpen ? "none" : "block";
+            randomMainBtn.textContent = isOpen ? "Random Theme ▸" : "Random Theme ▾";
         });
 
         // Radio buttons
@@ -110,20 +128,29 @@
             });
         });
 
-        // Random categories
-        panel.querySelectorAll("button[data-category]").forEach(btn => {
+        // Random category buttons
+        randomPanel.querySelectorAll("button[data-category]").forEach(btn => {
             btn.addEventListener("click", () => {
                 const category = btn.dataset.category;
                 fetch(THEME_API_BASE + category)
                     .then(r => r.json())
                     .then(data => applyTheme(data))
                     .catch(() => alert("Theme API error"));
+
+                // Close panels after selection
+                randomPanel.style.display = "none";
+                panel.style.display = "none";
+                randomMainBtn.textContent = "Random Theme ▸";
             });
         });
 
         // Close when clicking outside
         document.addEventListener("click", e => {
-            if (!panel.contains(e.target) && e.target !== toggleBtn) panel.style.display = "none";
+            if (!panel.contains(e.target) && e.target !== toggleBtn) {
+                panel.style.display = "none";
+                randomPanel.style.display = "none";
+                randomMainBtn.textContent = "Random Theme ▸";
+            }
         });
     }
 
