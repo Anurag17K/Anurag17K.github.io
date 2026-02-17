@@ -6,10 +6,18 @@
     // Optional per-site configuration
     const CONFIG = window.UTS_CONFIG || {};
 
-    const BTN_TOP = CONFIG.top || "10px";
-    const BTN_RIGHT = CONFIG.right || "20px";
-    const BTN_BOTTOM = CONFIG.bottom || null;
-    const BTN_LEFT = CONFIG.left || null;
+    const BTN_TOP = CONFIG.top;
+    const BTN_RIGHT = CONFIG.right;
+    const BTN_BOTTOM = CONFIG.bottom;
+    const BTN_LEFT = CONFIG.left;
+
+    // Only apply defaults if NO position config is provided
+    const hasCustomPosition = BTN_TOP || BTN_RIGHT || BTN_BOTTOM || BTN_LEFT;
+
+    const FINAL_TOP = hasCustomPosition ? BTN_TOP : "10px";
+    const FINAL_RIGHT = hasCustomPosition ? BTN_RIGHT : "20px";
+    const FINAL_BOTTOM = hasCustomPosition ? BTN_BOTTOM : null;
+    const FINAL_LEFT = hasCustomPosition ? BTN_LEFT : null;
 
     function injectCSS() {
         const css = `
@@ -71,17 +79,17 @@
     }
 
     function applyPosition(element) {
-        if (BTN_TOP) element.style.top = BTN_TOP;
-        if (BTN_RIGHT) element.style.right = BTN_RIGHT;
-        if (BTN_BOTTOM) element.style.bottom = BTN_BOTTOM;
-        if (BTN_LEFT) element.style.left = BTN_LEFT;
+        if (FINAL_TOP) element.style.top = FINAL_TOP;
+        if (FINAL_RIGHT) element.style.right = FINAL_RIGHT;
+        if (FINAL_BOTTOM) element.style.bottom = FINAL_BOTTOM;
+        if (FINAL_LEFT) element.style.left = FINAL_LEFT;
     }
 
     function applyPanelPosition(panel) {
-        if (BTN_TOP) panel.style.top = `calc(${BTN_TOP} + 60px)`;
-        if (BTN_RIGHT) panel.style.right = BTN_RIGHT;
-        if (BTN_BOTTOM) panel.style.bottom = `calc(${BTN_BOTTOM} + 60px)`;
-        if (BTN_LEFT) panel.style.left = BTN_LEFT;
+        if (FINAL_TOP) panel.style.top = `calc(${FINAL_TOP} + 60px)`;
+        if (FINAL_RIGHT) panel.style.right = FINAL_RIGHT;
+        if (FINAL_BOTTOM) panel.style.bottom = `calc(${FINAL_BOTTOM} + 60px)`;
+        if (FINAL_LEFT) panel.style.left = FINAL_LEFT;
     }
 
     function applyTheme(theme) {
