@@ -88,6 +88,7 @@
             <button data-category="city">City</button>
             <button data-category="night">Night</button>
             <button data-category="mountain">Mountain</button>
+            <button data-category="lava">Lava</button>
         `;
         document.body.appendChild(panel);
 
