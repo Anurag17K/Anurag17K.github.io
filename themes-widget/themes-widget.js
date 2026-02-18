@@ -146,7 +146,7 @@
             <label><input type="radio" name="uts-theme" value="default" checked> Default</label>
             <label><input type="radio" name="uts-theme" value="dark"> Dark</label>
             <hr>
-            <button id="randomMainBtn">Random Theme ▸</button>
+            <button id="randomMainBtn">Custom Theme ▸</button>
             <div id="randomCategoryPanel">
                 <button data-category="beach">Beach</button>
                 <button data-category="city">City</button>
