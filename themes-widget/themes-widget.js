@@ -132,7 +132,7 @@
                 <button data-category="night">Night</button>
                 <button data-category="mountain">Mountain</button>
                 <button data-category="lava">Lava</button>
-                <button data-category="grass">Grass</button>
+                <button data-category="Grass">Grass</button>
             </div>
         `;
 
