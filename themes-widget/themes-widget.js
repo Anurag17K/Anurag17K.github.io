@@ -99,7 +99,7 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(theme));
 
         // Maintain contrast for documentation/code sections
-        document.querySelectorAll('pre, code, table, .docs-section, p, li, ol, ul, h1, h2, h3, h4, h5, h6').forEach(el => {
+        document.querySelectorAll('pre, code, table, .docs-section').forEach(el => {
             el.style.backgroundColor = theme.text;   // invert for contrast
             el.style.color = theme.background;
             el.style.padding = "4px";
