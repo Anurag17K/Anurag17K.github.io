@@ -96,6 +96,14 @@
         document.documentElement.style.setProperty('--bg-color', theme.background);
         document.documentElement.style.setProperty('--text-color', theme.text);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(theme));
+
+        // Maintain contrast for important sections
+        document.querySelectorAll('pre, code, .docs-section, table').forEach(el => {
+            el.style.backgroundColor = theme.text; // invert bg/text if needed
+            el.style.color = theme.background;
+            el.style.padding = "5px"; // optional for readability
+            el.style.borderRadius = "4px"; // optional
+        });
     }
 
     function resetTheme() {
