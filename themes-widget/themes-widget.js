@@ -104,6 +104,19 @@
             el.style.padding = "5px"; // optional for readability
             el.style.borderRadius = "4px"; // optional
         });
+
+        // Keep panel readable
+        const panel = document.querySelector("#uts-panel");
+        if (panel) {
+            panel.style.backgroundColor = theme.background;
+            panel.style.color = theme.text;
+        }
+
+        // Also fix the buttons inside panel
+        panel.querySelectorAll("button, label").forEach(el => {
+            el.style.color = theme.text;
+            el.style.backgroundColor = "transparent"; // keep button background clean
+        });
     }
 
     function resetTheme() {
