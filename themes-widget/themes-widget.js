@@ -93,30 +93,30 @@
     }
 
     function applyTheme(theme) {
+        // Apply theme globally
         document.documentElement.style.setProperty('--bg-color', theme.background);
         document.documentElement.style.setProperty('--text-color', theme.text);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(theme));
 
-        // Maintain contrast for important sections
-        document.querySelectorAll('pre, code, .docs-section, table').forEach(el => {
-            el.style.backgroundColor = theme.text; // invert bg/text if needed
+        // Maintain contrast for documentation/code sections
+        document.querySelectorAll('pre, code, table, .docs-section, p, li, ol, ul, h1, h2, h3, h4, h5, h6').forEach(el => {
+            el.style.backgroundColor = theme.text;   // invert for contrast
             el.style.color = theme.background;
-            el.style.padding = "5px"; // optional for readability
-            el.style.borderRadius = "4px"; // optional
+            el.style.padding = "4px";
+            el.style.borderRadius = "4px";
         });
 
-        // Keep panel readable
+        // Keep theme panel readable
         const panel = document.querySelector("#uts-panel");
         if (panel) {
             panel.style.backgroundColor = theme.background;
             panel.style.color = theme.text;
-        }
 
-        // Also fix the buttons inside panel
-        panel.querySelectorAll("button, label").forEach(el => {
-            el.style.color = theme.text;
-            el.style.backgroundColor = "transparent"; // keep button background clean
-        });
+            panel.querySelectorAll("button, label").forEach(el => {
+                el.style.color = theme.text;
+                el.style.backgroundColor = "transparent";
+            });
+        }
     }
 
     function resetTheme() {
